@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { ChevronRight, ShieldCheck } from "lucide-react";
 import { getAllProducts, getProductBySlug, formatPrice } from "@/lib/products";
 import AddToCartForm from "@/components/AddToCartForm";
 
@@ -23,9 +25,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const related = getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 3);
+
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
-      <div className="grid gap-10 sm:grid-cols-2">
+      {/* Breadcrumbs */}
+      <nav className="flex items-center gap-1.5 text-xs font-medium text-slate">
+        <Link href="/" className="hover:text-navy">Home</Link>
+        <ChevronRight size={12} />
+        <Link href="/products" className="hover:text-navy">Products</Link>
+        <ChevronRight size={12} />
+        <span className="text-navy">{product.categoryLabel}</span>
+      </nav>
+
+      <div className="mt-6 grid gap-10 sm:grid-cols-2">
         <div className="relative aspect-square rounded-lg border border-powder bg-white">
           <Image src={product.image} alt={product.name} fill className="object-contain p-10" />
         </div>
@@ -37,6 +50,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p className="mt-4 text-sm leading-relaxed text-black">{product.description}</p>
 
           <AddToCartForm product={product} />
+
+          <div className="mt-6 flex items-center gap-2 text-xs font-medium text-black">
+            <ShieldCheck size={16} className="text-navy" strokeWidth={1.75} />
+            Meets international CP standards
+          </div>
 
           <div className="mt-10 border-t border-powder pt-6">
             <h2 className="text-sm font-bold text-navy">Specifications</h2>
@@ -51,6 +69,35 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </div>
+
+      {/* Related products */}
+      {related.length > 0 && (
+        <div className="mt-20 border-t border-powder pt-10">
+          <h2 className="text-lg font-bold text-navy">You May Also Need</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+            {related.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/products/${p.slug}`}
+                className="group flex flex-col overflow-hidden rounded-lg border border-powder transition-colors hover:border-navy"
+              >
+                <div className="relative aspect-square w-full bg-white">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-contain p-6 transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="border-t border-powder p-4">
+                  <p className="text-sm font-semibold text-navy">{p.categoryLabel}</p>
+                  <p className="mt-2 text-sm font-bold text-black">{formatPrice(p.priceCents)}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

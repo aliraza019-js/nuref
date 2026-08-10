@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "sonner";
+import { Lock, Truck } from "lucide-react";
 import { useCartStore, cartTotalCents } from "@/store/useCartStore";
 import { formatPrice } from "@/lib/products";
 
@@ -105,6 +106,17 @@ export default function CartPage() {
       >
         {checkingOut ? "Redirecting to checkout..." : "Checkout"}
       </button>
+
+      <div className="mt-5 flex flex-col items-center gap-2 text-xs font-medium text-slate sm:flex-row sm:justify-center sm:gap-6">
+        <span className="flex items-center gap-1.5">
+          <Lock size={14} strokeWidth={1.75} />
+          Secure card checkout via Stripe
+        </span>
+        <span className="flex items-center gap-1.5">
+          <Truck size={14} strokeWidth={1.75} />
+          Shipped directly to your address
+        </span>
+      </div>
     </main>
   );
 }
