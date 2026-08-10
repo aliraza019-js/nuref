@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Identity & Access
+//
+// Passwords are bcrypt hashes — never plaintext. `role` is kept as a plain
+// string so roles can evolve without a migration.
+// ─────────────────────────────────────────────────────────────────────────────
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String // bcrypt hash
+  role      String   @default("member")
+  status    String   @default("active") // active | disabled
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@map("users")
+}
