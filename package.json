@@ -7,13 +7,11 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "sh -c 'set -a && . ./.env.local 2>/dev/null || . ./.env; set +a && DATABASE_URL=\"$DIRECT_URL\" prisma db push'",
-    "db:seed": "npx tsx prisma/seed.ts"
+    "db:push": "sh -c 'set -a && . ./.env.local 2>/dev/null || . ./.env; set +a && DATABASE_URL=\"$DIRECT_URL\" prisma db push'"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
-    "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
@@ -21,13 +19,14 @@
     "pg": "^8.23.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "resend": "^6.18.1",
     "sonner": "^2.0.8",
+    "stripe": "^22.4.0",
     "tailwind-merge": "^3.6.0",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/pg": "^8.21.0",
     "@types/react": "^19",
