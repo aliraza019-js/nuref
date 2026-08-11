@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ChevronRight, ShieldCheck } from "lucide-react";
 import { getAllProducts, getProductBySlug, formatPrice } from "@/lib/products";
 import AddToCartForm from "@/components/AddToCartForm";
+import ProductCard from "@/components/ProductCard";
 
 export function generateStaticParams() {
   return getAllProducts().map((p) => ({ slug: p.slug }));
@@ -26,9 +27,28 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
 
   const related = getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 3);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: `${siteUrl}${product.image}`,
+    url: `${siteUrl}/products/${product.slug}`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "USD",
+      price: (product.priceCents / 100).toFixed(2),
+      availability: "https://schema.org/InStock",
+      url: `${siteUrl}/products/${product.slug}`,
+    },
+  };
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-1.5 text-xs font-medium text-slate">
         <Link href="/" className="hover:text-navy">Home</Link>
@@ -74,26 +94,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {related.length > 0 && (
         <div className="mt-20 border-t border-powder pt-10">
           <h2 className="text-lg font-bold text-navy">You May Also Need</h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+          <div className="mt-6 grid gap-8 sm:grid-cols-3">
             {related.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/products/${p.slug}`}
-                className="group flex flex-col overflow-hidden rounded-lg border border-powder transition-colors hover:border-navy"
-              >
-                <div className="relative aspect-square w-full bg-white">
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    className="object-contain p-6 transition-transform group-hover:scale-105"
-                  />
-                </div>
-                <div className="border-t border-powder p-4">
-                  <p className="text-sm font-semibold text-navy">{p.categoryLabel}</p>
-                  <p className="mt-2 text-sm font-bold text-black">{formatPrice(p.priceCents)}</p>
-                </div>
-              </Link>
+              <ProductCard key={p.slug} product={p} compact />
             ))}
           </div>
         </div>

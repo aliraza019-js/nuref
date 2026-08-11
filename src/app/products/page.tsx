@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { BadgeCheck } from "lucide-react";
-import { getAllProducts, formatPrice } from "@/lib/products";
+import { getAllProducts } from "@/lib/products";
+import ProductCard from "@/components/ProductCard";
 
 export default function ProductsPage() {
   const products = getAllProducts();
@@ -40,31 +38,9 @@ export default function ProductsPage() {
         ))}
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((product) => (
-          <Link
-            key={product.slug}
-            href={`/products/${product.slug}`}
-            className="group flex flex-col overflow-hidden rounded-lg border border-powder transition-colors hover:border-navy"
-          >
-            <div className="relative aspect-square w-full bg-white">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-contain p-8 transition-transform group-hover:scale-105"
-              />
-              <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-navy shadow-sm ring-1 ring-powder">
-                <BadgeCheck size={12} strokeWidth={2} />
-                In Stock
-              </span>
-            </div>
-            <div className="border-t border-powder p-5">
-              <h2 className="text-sm font-bold text-navy">{product.name}</h2>
-              <p className="mt-2 text-sm text-black">{product.shortDescription}</p>
-              <p className="mt-4 text-base font-bold text-black">{formatPrice(product.priceCents)}</p>
-            </div>
-          </Link>
+          <ProductCard key={product.slug} product={product} />
         ))}
       </div>
     </main>

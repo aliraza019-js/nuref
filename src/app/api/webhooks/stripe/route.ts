@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
-import { sendOrderNotification } from "@/lib/email";
+import { sendOrderNotification, sendOrderConfirmation } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -60,19 +60,27 @@ export async function POST(request: NextRequest) {
       include: { items: true },
     });
 
+    const emailPayload = {
+      orderId: order.id,
+      customerName: order.customerName,
+      customerEmail: order.customerEmail,
+      shippingAddress: order.shippingAddress,
+      totalCents: order.totalCents,
+      currency: order.currency,
+      items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, priceCents: i.priceCents })),
+    };
+
+    // Order is already recorded even if either email fails - don't let a
+    // Resend outage roll back or retry-loop a payment that already succeeded.
     try {
-      await sendOrderNotification({
-        orderId: order.id,
-        customerName: order.customerName,
-        customerEmail: order.customerEmail,
-        shippingAddress: order.shippingAddress,
-        totalCents: order.totalCents,
-        currency: order.currency,
-        items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, priceCents: i.priceCents })),
-      });
+      await sendOrderNotification(emailPayload);
     } catch (err) {
-      // Order is already recorded even if the notification email fails.
       console.error("Failed to send order notification email", err);
+    }
+    try {
+      await sendOrderConfirmation(emailPayload);
+    } catch (err) {
+      console.error("Failed to send order confirmation email", err);
     }
   }
 

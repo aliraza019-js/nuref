@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
-import { BadgeCheck, Lock, ShieldCheck, Truck } from "lucide-react";
-import { getAllProducts, formatPrice } from "@/lib/products";
+import { Lock, ShieldCheck, Truck } from "lucide-react";
+import { getAllProducts } from "@/lib/products";
 import ElectrodeGraphic from "@/components/ElectrodeGraphic";
+import ProductCard from "@/components/ProductCard";
 
 export default function Home() {
   const products = getAllProducts();
@@ -68,30 +68,9 @@ export default function Home() {
           High-performance reference electrodes for cathodic protection monitoring and control.
         </p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
-            <Link
-              key={product.slug}
-              href={`/products/${product.slug}`}
-              className="group flex flex-col overflow-hidden rounded-lg border border-powder transition-colors hover:border-navy"
-            >
-              <div className="relative aspect-square w-full bg-white">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-contain p-6 transition-transform group-hover:scale-105"
-                />
-                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-navy shadow-sm ring-1 ring-powder">
-                  <BadgeCheck size={12} strokeWidth={2} />
-                  In Stock
-                </span>
-              </div>
-              <div className="border-t border-powder p-4">
-                <p className="text-sm font-semibold text-navy">{product.categoryLabel}</p>
-                <p className="mt-2 text-sm font-bold text-black">{formatPrice(product.priceCents)}</p>
-              </div>
-            </Link>
+            <ProductCard key={product.slug} product={product} compact />
           ))}
         </div>
       </section>

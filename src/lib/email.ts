@@ -10,6 +10,12 @@ function fromAddress() {
   return process.env.RESEND_FROM_EMAIL || "Nuref <onboarding@resend.dev>";
 }
 
+function formatMoney(cents: number, currency: string) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: currency.toUpperCase() }).format(
+    cents / 100,
+  );
+}
+
 export async function sendSalesInquiry(input: {
   name: string;
   email: string;
@@ -36,7 +42,7 @@ export async function sendSalesInquiry(input: {
   });
 }
 
-export async function sendOrderNotification(input: {
+interface OrderEmailInput {
   orderId: number;
   customerName?: string | null;
   customerEmail: string;
@@ -44,27 +50,20 @@ export async function sendOrderNotification(input: {
   totalCents: number;
   currency: string;
   items: { name: string; quantity: number; priceCents: number }[];
-}) {
+}
+
+export async function sendOrderNotification(input: OrderEmailInput) {
   const to = process.env.ORDER_NOTIFICATION_EMAIL;
   if (!to) throw new Error("ORDER_NOTIFICATION_EMAIL is not set");
 
-  const total = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: input.currency.toUpperCase(),
-  }).format(input.totalCents / 100);
-
   const lines = input.items.map(
-    (i) =>
-      `- ${i.quantity} x ${i.name} (${new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: input.currency.toUpperCase(),
-      }).format(i.priceCents / 100)} each)`,
+    (i) => `- ${i.quantity} x ${i.name} (${formatMoney(i.priceCents, input.currency)} each)`,
   );
 
   await client().emails.send({
     from: fromAddress(),
     to,
-    subject: `New paid order #${input.orderId} — ${total}`,
+    subject: `New paid order #${input.orderId} — ${formatMoney(input.totalCents, input.currency)}`,
     text: [
       `Order #${input.orderId}`,
       `Customer: ${input.customerName || "N/A"} <${input.customerEmail}>`,
@@ -72,12 +71,41 @@ export async function sendOrderNotification(input: {
       "Items:",
       ...lines,
       "",
-      `Total: ${total}`,
+      `Total: ${formatMoney(input.totalCents, input.currency)}`,
       "",
       "Shipping address:",
       JSON.stringify(input.shippingAddress ?? {}, null, 2),
       "",
       "This order is drop-shipped — please forward to the fulfillment supplier.",
+    ].join("\n"),
+  });
+}
+
+/** Receipt sent to the customer themselves, separate from the internal fulfillment notification. */
+export async function sendOrderConfirmation(input: OrderEmailInput) {
+  const lines = input.items.map(
+    (i) => `- ${i.quantity} x ${i.name} (${formatMoney(i.priceCents, input.currency)} each)`,
+  );
+
+  await client().emails.send({
+    from: fromAddress(),
+    to: input.customerEmail,
+    subject: `Your Nuref order #${input.orderId} is confirmed`,
+    text: [
+      `Hi ${input.customerName || "there"},`,
+      "",
+      `Thanks for your order — we've received your payment and your order is being prepared for shipment.`,
+      "",
+      `Order #${input.orderId}`,
+      "",
+      "Items:",
+      ...lines,
+      "",
+      `Total: ${formatMoney(input.totalCents, input.currency)}`,
+      "",
+      "If you have any questions about your order, just reply to this email.",
+      "",
+      "— Nuref",
     ].join("\n"),
   });
 }
