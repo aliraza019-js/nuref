@@ -26,3 +26,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes nr-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.nr-float {
+  animation: nr-float 7s ease-in-out infinite;
+}
+
+.nr-checkout-input {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 11px;
+  border: 1px solid var(--nuref-powder);
+  font-size: 15px;
+  color: #000000;
+  background: #ffffff;
+  font-family: inherit;
+}
+
+.nr-checkout-input:focus {
+  outline: 2px solid var(--nuref-navy);
+  outline-offset: 1px;
+}
+
+.nr-checkout-input:disabled {
+  background: rgba(183, 198, 220, 0.15);
+  color: var(--nuref-slate);
+}

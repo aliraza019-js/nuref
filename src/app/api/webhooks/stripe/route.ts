@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 import { sendOrderNotification, sendOrderConfirmation } from "@/lib/email";
+import { getProductBySlug } from "@/lib/products";
 
 export const runtime = "nodejs";
 
@@ -24,38 +25,50 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
-    const sessionSummary = event.data.object as Stripe.Checkout.Session;
+  if (event.type === "payment_intent.succeeded") {
+    const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
     // Already recorded (Stripe can retry webhook delivery) — skip.
-    const existing = await prisma.order.findUnique({ where: { stripeSessionId: sessionSummary.id } });
+    const existing = await prisma.order.findUnique({
+      where: { stripePaymentIntentId: paymentIntent.id },
+    });
     if (existing) {
       return NextResponse.json({ ok: true });
     }
 
-    const session = await stripe.checkout.sessions.retrieve(sessionSummary.id, {
-      expand: ["line_items"],
-    });
-    const lineItems = session.line_items?.data ?? [];
+    const meta = paymentIntent.metadata;
+    let lineItems: { slug: string; quantity: number }[] = [];
+    try {
+      lineItems = JSON.parse(meta.items || "[]");
+    } catch {
+      console.error("Failed to parse PaymentIntent items metadata", paymentIntent.id);
+    }
+
+    const resolvedItems = lineItems
+      .map((li) => {
+        const product = getProductBySlug(li.slug);
+        if (!product) return null;
+        return { productSlug: li.slug, name: product.name, priceCents: product.priceCents, quantity: li.quantity };
+      })
+      .filter((i): i is NonNullable<typeof i> => i !== null);
+
+    const shippingAddress = {
+      name: meta.customerName,
+      company: meta.customerCompany || undefined,
+      address: meta.shippingAddress,
+      city: meta.shippingCity,
+      country: meta.shippingCountry,
+    };
 
     const order = await prisma.order.create({
       data: {
-        stripeSessionId: session.id,
-        customerEmail: session.customer_details?.email || "unknown@nuref.com",
-        customerName: session.customer_details?.name,
-        shippingAddress: session.collected_information?.shipping_details
-          ? JSON.parse(JSON.stringify(session.collected_information.shipping_details))
-          : undefined,
-        totalCents: session.amount_total ?? 0,
-        currency: session.currency ?? "usd",
-        items: {
-          create: lineItems.map((li) => ({
-            productSlug: li.description ?? "unknown",
-            name: li.description ?? "Unknown item",
-            priceCents: li.amount_total && li.quantity ? Math.round(li.amount_total / li.quantity) : 0,
-            quantity: li.quantity ?? 1,
-          })),
-        },
+        stripePaymentIntentId: paymentIntent.id,
+        customerEmail: meta.customerEmail || "unknown@nuref.com",
+        customerName: meta.customerName,
+        shippingAddress,
+        totalCents: paymentIntent.amount,
+        currency: paymentIntent.currency,
+        items: { create: resolvedItems },
       },
       include: { items: true },
     });

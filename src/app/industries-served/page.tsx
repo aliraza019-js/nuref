@@ -16,28 +16,35 @@ const INDUSTRIES = [
   "Consultants",
   "Government Infrastructure Authorities",
   "Ports & Harbors",
-  "Bridge and Highway Authorities",
+  "Bridge & Highway Authorities",
   "Engineering Procurement Teams",
   "Industrial Asset Owners",
 ];
 
 export default function IndustriesServedPage() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="text-3xl font-bold text-navy">Industries Served</h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-black">
-        Nuref reference electrodes and corrosion monitoring solutions are trusted across a wide
-        range of industries responsible for protecting critical infrastructure from corrosion.
-      </p>
+    <main>
+      <div className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-navy">Who we serve</p>
+          <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">Industries Served</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-black">
+            Nuref reference electrodes and corrosion monitoring solutions are trusted across the
+            industries responsible for protecting critical infrastructure from corrosion.
+          </p>
+        </div>
+      </div>
 
-      <ul className="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-        {INDUSTRIES.map((industry) => (
-          <li key={industry} className="flex items-start gap-3 text-base text-black">
-            <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold" />
-            {industry}
-          </li>
-        ))}
-      </ul>
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+          {INDUSTRIES.map((industry) => (
+            <div key={industry} className="flex items-center gap-3 rounded-2xl border border-powder p-5">
+              <span className="h-2 w-2 flex-shrink-0 rounded-full bg-gold" />
+              <span className="text-sm font-semibold leading-snug text-navy">{industry}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </main>
   );
 }

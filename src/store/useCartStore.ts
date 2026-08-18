@@ -4,6 +4,7 @@ import type { Product } from "@/lib/products";
 
 export interface CartItem {
   slug: string;
+  sku: string;
   name: string;
   priceCents: number;
   image: string;
@@ -38,6 +39,7 @@ export const useCartStore = create<CartState>()(
               ...items,
               {
                 slug: product.slug,
+                sku: product.sku,
                 name: product.name,
                 priceCents: product.priceCents,
                 image: product.image,

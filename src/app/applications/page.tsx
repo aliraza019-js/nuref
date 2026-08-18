@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Image as ImageIcon } from "lucide-react";
 
 export const metadata: Metadata = { title: "Applications | Nuref" };
 
@@ -38,29 +39,41 @@ const APPLICATIONS = [
 
 export default function ApplicationsPage() {
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="text-3xl font-bold text-navy">Applications</h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-black">
-        Nuref reference electrodes are used across a range of cathodic protection and corrosion
-        monitoring applications.
-      </p>
-
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {APPLICATIONS.map((app) => (
-          <div key={app.title} className="rounded-lg border border-powder p-6">
-            <h2 className="text-base font-bold text-navy">{app.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-black">{app.description}</p>
-          </div>
-        ))}
+    <main>
+      <div className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-navy">In the field</p>
+          <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">Applications</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-black">
+            Where Nuref reference electrodes are used across cathodic protection and corrosion
+            monitoring programmes.
+          </p>
+        </div>
       </div>
 
-      <div className="mt-12 text-center">
-        <Link
-          href="/products"
-          className="inline-block rounded-md bg-navy px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-        >
-          Browse Products
-        </Link>
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {APPLICATIONS.map((app) => (
+            <div key={app.title} className="overflow-hidden rounded-2xl border border-powder">
+              <div className="flex h-[150px] items-center justify-center bg-powder/20">
+                <ImageIcon size={26} strokeWidth={1.5} className="text-slate" />
+              </div>
+              <div className="p-6">
+                <h2 className="text-base font-bold leading-snug text-navy">{app.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-black">{app.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-11 text-center">
+          <Link
+            href="/products"
+            className="inline-block rounded-xl bg-navy px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+          >
+            Browse products
+          </Link>
+        </div>
       </div>
     </main>
   );

@@ -1,42 +1,75 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { BadgeCheck } from "lucide-react";
+import { toast } from "sonner";
 import { formatPrice, type Product } from "@/lib/products";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
+  const addItem = useCartStore((s) => s.addItem);
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem(product, 1);
+    toast.success(`Added ${product.name} to cart`);
+  };
+
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="group relative flex flex-col items-center rounded-2xl border border-powder/60 bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-xl"
-    >
-      <div
-        className={`relative w-full ${compact ? "h-28" : "h-36"} transition-transform duration-300 group-hover:scale-105`}
-        style={{ filter: "drop-shadow(0 10px 14px rgba(20,40,76,0.12))" }}
-      >
-        <Image src={product.image} alt={product.name} fill className="object-contain" />
-      </div>
-
-      <h3 className={`mt-6 font-bold text-navy ${compact ? "text-sm" : "text-base"}`}>
-        {product.categoryLabel}
-      </h3>
-
-      {!compact && (
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-black/70">{product.shortDescription}</p>
-      )}
-
-      <div className="mt-4 flex items-center gap-2">
-        <span className="text-sm font-bold text-black">{formatPrice(product.priceCents)}</span>
-        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-slate">
-          <BadgeCheck size={12} strokeWidth={2} />
-          In Stock
+    <div className="group flex flex-col overflow-hidden rounded-xl border border-powder bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+      <Link href={`/products/${product.slug}`} className={`relative block ${compact ? "h-[200px]" : "h-[260px]"} bg-powder/20`}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1]"
+          style={{ background: "radial-gradient(58% 52% at 50% 40%, rgba(240,180,41,0.10), transparent 70%)" }}
+        />
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className={`object-contain ${compact ? "p-6" : "p-8"} transition-transform duration-300 group-hover:scale-105`}
+        />
+        <span className="absolute left-3 top-3 z-[2] rounded-full border border-powder bg-white px-2.5 py-1 text-[10px] font-bold tracking-wide text-navy">
+          {product.sku}
         </span>
-      </div>
+        {!compact && (
+          <span className="absolute right-3 top-3 z-[2] rounded-full bg-powder/40 px-2.5 py-1 text-[11px] font-semibold text-navy">
+            In stock
+          </span>
+        )}
+      </Link>
 
-      {/* Hover glow, matching the reference card's underglow */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -bottom-1 left-1/2 h-2 w-2/5 -translate-x-1/2 translate-y-1 rounded-full bg-gold opacity-0 blur-md transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-60"
-      />
-    </Link>
+      <div className={`flex flex-1 flex-col ${compact ? "p-4" : "p-5"}`}>
+        <Link href={`/products/${product.slug}`} className={`font-bold leading-snug text-navy ${compact ? "text-sm" : "text-base"}`}>
+          {product.name}
+        </Link>
+
+        {!compact && (
+          <>
+            <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-black">{product.shortDescription}</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {product.chips.map((chip) => (
+                <span key={chip} className="rounded-md bg-powder/25 px-2 py-1 text-xs font-semibold text-navy">
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className={`flex items-center justify-between gap-3 ${compact ? "mt-3" : "mt-4"}`}>
+          <span className={`font-extrabold tracking-tight text-navy ${compact ? "text-base" : "text-lg"}`}>
+            {formatPrice(product.priceCents)}
+          </span>
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="rounded-lg bg-navy px-3.5 py-2 text-xs font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+          >
+            {compact ? "Add" : "Add to cart"}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

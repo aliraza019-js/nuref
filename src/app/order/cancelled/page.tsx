@@ -9,7 +9,7 @@ export default function OrderCancelledPage() {
       </p>
       <Link
         href="/cart"
-        className="mt-8 inline-block rounded-md bg-navy px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        className="mt-8 inline-block rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
       >
         Return to Cart
       </Link>
