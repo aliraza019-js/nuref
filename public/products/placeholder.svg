@@ -1,8 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-  <rect width="600" height="600" fill="#ffffff"/>
-  <rect x="1" y="1" width="598" height="598" fill="none" stroke="#b7c6dc" stroke-width="2"/>
-  <rect x="255" y="150" width="90" height="260" rx="10" fill="#14284c"/>
-  <rect x="270" y="120" width="60" height="40" rx="6" fill="#64749a"/>
-  <rect x="270" y="410" width="60" height="30" fill="#f0b429"/>
-  <text x="300" y="480" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#14284c" text-anchor="middle">Product image coming soon</text>
+<!--
+  Neutral product placeholder. Deliberately a flat monochrome silhouette so it
+  never reads as a real photo. Matches the real product artwork's aspect ratio
+  (~7.5:1) so swapping a real photo in doesn't change any layout sizing.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1327" height="177" viewBox="0 0 1327 177" fill="none">
+  <!-- cable -->
+  <rect x="8" y="78" width="430" height="22" rx="11" fill="#b7c6dc"/>
+  <!-- cable gland -->
+  <rect x="400" y="44" width="180" height="90" rx="22" fill="#64749a"/>
+  <!-- body -->
+  <rect x="558" y="37" width="566" height="104" rx="20" fill="#64749a"/>
+  <!-- label panel -->
+  <rect x="652" y="61" width="330" height="56" rx="6" fill="#dbe3ee"/>
+  <!-- tip cap -->
+  <rect x="1104" y="39" width="210" height="100" rx="46" fill="#b7c6dc"/>
 </svg>

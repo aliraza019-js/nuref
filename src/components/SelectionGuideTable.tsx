@@ -24,20 +24,20 @@ export default function SelectionGuideTable() {
           <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-navy sm:text-4xl">
             Which electrode for which environment?
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-black">
+          <p className="mt-4 text-base leading-relaxed text-ink">
             Selection follows the electrolyte your structure sits in and how long the electrode must
             stay in service. Start here — our engineers confirm against your survey data.
           </p>
           <Link
             href="/contact"
-            className="mt-5 inline-block rounded-lg bg-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+            className="mt-5 inline-block rounded-lg bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-ink"
           >
             Ask an engineer
           </Link>
         </div>
 
         <div className="overflow-x-auto rounded-2xl border border-powder shadow-sm">
-          <div className="grid min-w-[520px] grid-cols-[1.05fr_1.15fr_0.8fr] bg-navy">
+          <div className="grid min-w-[520px] grid-cols-[1.05fr_1.15fr_0.8fr] bg-ink">
             <div className="px-5 py-4 text-[11px] font-bold uppercase tracking-wide text-powder">Environment</div>
             <div className="px-5 py-4 text-[11px] font-bold uppercase tracking-wide text-powder">Recommended</div>
             <div className="px-5 py-4 text-[11px] font-bold uppercase tracking-wide text-powder">Design life</div>
@@ -45,13 +45,13 @@ export default function SelectionGuideTable() {
           {ROWS.map((row) => (
             <div
               key={row.env}
-              className="grid min-w-[520px] grid-cols-[1.05fr_1.15fr_0.8fr] border-t border-powder bg-white transition-colors hover:bg-powder/15"
+              className="grid min-w-[520px] grid-cols-[1.05fr_1.15fr_0.8fr] border-t border-powder bg-white transition-colors hover:bg-panel"
             >
-              <div className="px-5 py-4 text-sm text-black">{row.env}</div>
-              <Link href={`/products/${row.recommendedSlug}`} className="px-5 py-4 text-sm font-semibold text-navy hover:text-gold">
+              <div className="px-5 py-4 text-sm text-ink">{row.env}</div>
+              <Link href={`/products/${row.recommendedSlug}`} className="px-5 py-4 text-sm font-semibold text-navy hover:text-ink">
                 {row.recommended}
               </Link>
-              <div className="px-5 py-4 text-sm text-black">{row.life}</div>
+              <div className="px-5 py-4 text-sm text-ink">{row.life}</div>
             </div>
           ))}
         </div>

@@ -15,22 +15,22 @@ export default function AddToCartForm({ product }: { product: Product }) {
   };
 
   return (
-    <div className="mt-6 flex flex-wrap items-stretch gap-3">
-      <div className="flex items-center rounded-xl border border-powder">
+    <div className="flex flex-wrap items-center gap-4">
+      <div className="flex items-center gap-2.5">
         <button
           type="button"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="h-12 w-11 text-lg font-semibold text-navy"
           aria-label="Decrease quantity"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-base text-ink transition-colors hover:bg-ink/5"
         >
-          −
+          &minus;
         </button>
-        <span className="w-12 text-center text-base font-bold text-navy">{quantity}</span>
+        <span className="w-6 text-center text-base font-semibold text-ink">{quantity}</span>
         <button
           type="button"
           onClick={() => setQuantity((q) => q + 1)}
-          className="h-12 w-11 text-lg font-semibold text-navy"
           aria-label="Increase quantity"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-base text-ink transition-colors hover:bg-ink/5"
         >
           +
         </button>
@@ -39,9 +39,9 @@ export default function AddToCartForm({ product }: { product: Product }) {
       <button
         type="button"
         onClick={handleAdd}
-        className="h-12 min-w-[200px] flex-1 rounded-xl bg-gold text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-white"
+        className="h-12 flex-1 rounded-full bg-ink px-9 text-sm font-semibold text-white transition-opacity hover:opacity-85"
       >
-        Add to cart
+        Add to Cart
       </button>
     </div>
   );

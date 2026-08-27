@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCartStore, cartTotalCents } from "@/store/useCartStore";
 import { formatPrice } from "@/lib/products";
@@ -19,12 +18,12 @@ export default function CartPage() {
     return (
       <main className="mx-auto max-w-6xl px-6 py-16">
         <h1 className="mb-8 text-3xl font-extrabold tracking-tight text-navy">Your cart</h1>
-        <div className="rounded-2xl border border-powder bg-powder/15 py-20 text-center">
+        <div className="rounded-2xl border border-powder bg-panel py-20 text-center">
           <p className="text-lg font-bold text-navy">Your cart is empty</p>
-          <p className="mt-2 text-sm text-black">Browse the catalogue to add reference electrodes and accessories.</p>
+          <p className="mt-2 text-sm text-ink">Browse the catalogue to add reference electrodes and accessories.</p>
           <Link
             href="/products"
-            className="mt-6 inline-block rounded-xl bg-navy px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+            className="mt-6 inline-block rounded-xl bg-ink px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-ink"
           >
             Shop electrodes
           </Link>
@@ -40,13 +39,10 @@ export default function CartPage() {
       <div className="grid gap-9 lg:grid-cols-[1.5fr_0.72fr]">
         <div className="overflow-hidden rounded-2xl border border-powder">
           {items.map((item) => (
-            <div key={item.slug} className="grid grid-cols-[80px_1fr_auto] items-center gap-5 border-b border-powder p-5 last:border-b-0">
-              <div className="relative h-20 w-20 rounded-lg bg-powder/20">
-                <Image src={item.image} alt={item.name} fill className="object-contain p-2.5" />
-              </div>
+            <div key={item.slug} className="grid grid-cols-[1fr_auto] items-center gap-5 border-b border-powder p-5 last:border-b-0">
               <div>
                 <div className="text-[11px] font-bold uppercase tracking-wide text-slate">{item.sku}</div>
-                <Link href={`/products/${item.slug}`} className="mt-1 block text-base font-bold leading-snug text-navy hover:text-gold">
+                <Link href={`/products/${item.slug}`} className="mt-1 block text-base font-bold leading-snug text-navy hover:text-ink">
                   {item.name}
                 </Link>
                 <div className="mt-2 flex items-center gap-3.5">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Image as ImageIcon } from "lucide-react";
+import Image from "next/image";
 
 export const metadata: Metadata = { title: "About Nuref | Nuref" };
 
@@ -44,36 +44,39 @@ export default function AboutPage() {
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
               A manufacturer, not a reseller.
             </h1>
-            <p className="mt-5 text-base leading-relaxed text-black">
+            <p className="mt-5 text-base leading-relaxed text-ink">
               Nuref is a manufacturer and technology provider specializing in Cathodic Protection
               reference electrodes and corrosion monitoring solutions. We design, develop, manufacture
               and supply high-performance reference electrodes used to monitor and control CP systems
               for critical infrastructure — ensuring long-term corrosion prevention and asset
               integrity.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-black">
+            <p className="mt-4 text-base leading-relaxed text-ink">
               Our products are built to comply with international cathodic protection standards and to
               perform reliably in harsh industrial environments — from buried pipelines to marine and
               offshore structures.
             </p>
           </div>
-          <div className="flex h-[340px] items-center justify-center rounded-2xl bg-powder/20">
-            <div className="flex flex-col items-center gap-2 text-slate">
-              <ImageIcon size={32} strokeWidth={1.5} />
-              <span className="text-xs font-medium">Facility / product photo</span>
-            </div>
+          <div className="relative flex h-[340px] items-center justify-center rounded-2xl bg-panel p-10">
+            <Image
+              src="/products/NUREF_ARGENT_AQUA.png"
+              alt="Nuref Ag/AgCl reference electrode"
+              width={420}
+              height={300}
+              className="h-auto w-full max-w-[300px] object-contain"
+            />
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
         <h2 className="text-3xl font-extrabold tracking-tight text-navy">What we offer</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {OFFERINGS.map((o) => (
             <div key={o.title} className="rounded-2xl border border-powder p-6">
-              <span className="mb-3.5 block h-1 w-8 rounded-full bg-gold" />
+              <span className="mb-3.5 block h-1 w-8 rounded-full bg-ink" />
               <h3 className="text-base font-bold leading-snug text-navy">{o.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-black">{o.body}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink">{o.body}</p>
             </div>
           ))}
         </div>

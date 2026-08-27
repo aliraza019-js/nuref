@@ -10,6 +10,14 @@ function fromAddress() {
   return process.env.RESEND_FROM_EMAIL || "Nuref <onboarding@resend.dev>";
 }
 
+/** Adds an email to the Resend Audience backing the footer newsletter signup. */
+export async function subscribeToNewsletter(email: string) {
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
+  if (!audienceId) throw new Error("RESEND_AUDIENCE_ID is not set");
+
+  await client().contacts.create({ email, audienceId, unsubscribed: false });
+}
+
 function formatMoney(cents: number, currency: string) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: currency.toUpperCase() }).format(
     cents / 100,

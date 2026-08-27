@@ -20,19 +20,19 @@ export default function OrderSummary({
 }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-powder shadow-[0_30px_56px_-32px_rgba(20,40,76,0.28)] lg:sticky lg:top-28">
-      <div className="bg-navy px-6 py-5">
+      <div className="bg-ink px-6 py-5">
         <span className="text-base font-bold text-white">Order summary</span>
       </div>
       <div className="p-6">
-        <div className="flex justify-between py-2 text-sm text-black">
+        <div className="flex justify-between py-2 text-sm text-ink">
           <span>Subtotal</span>
           <span className="font-semibold">{formatPrice(totalCents)}</span>
         </div>
-        <div className="flex justify-between py-2 text-sm text-black">
+        <div className="flex justify-between py-2 text-sm text-ink">
           <span>Freight</span>
           <span>Calculated at checkout</span>
         </div>
-        <div className="flex justify-between py-2 text-sm text-black">
+        <div className="flex justify-between py-2 text-sm text-ink">
           <span>Tax</span>
           <span>Applied at checkout</span>
         </div>
@@ -46,7 +46,7 @@ export default function OrderSummary({
           type="button"
           onClick={onCtaClick}
           disabled={ctaDisabled}
-          className="w-full rounded-xl bg-gold px-6 py-3.5 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-white disabled:opacity-50"
+          className="w-full rounded-xl bg-ink px-6 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           {ctaLabel}
         </button>

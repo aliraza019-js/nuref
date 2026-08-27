@@ -4,12 +4,12 @@ export default function OrderCancelledPage() {
   return (
     <main className="mx-auto max-w-xl px-6 py-20 text-center">
       <h1 className="text-2xl font-bold text-navy">Checkout Cancelled</h1>
-      <p className="mt-4 text-base leading-relaxed text-black">
+      <p className="mt-4 text-base leading-relaxed text-ink">
         Your order was not completed and you have not been charged. Your cart is still saved.
       </p>
       <Link
         href="/cart"
-        className="mt-8 inline-block rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+        className="mt-8 inline-block rounded-xl bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-ink"
       >
         Return to Cart
       </Link>

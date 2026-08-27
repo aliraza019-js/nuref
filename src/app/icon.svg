@@ -1,0 +1,8 @@
+<!-- Favicon: the three bars from the Nuref logo mark, bottom-aligned.
+     Set on the ink background so the lightest bar stays legible at 16px. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
+  <rect x="19.5" y="29" width="7" height="20" rx="2" fill="#e8e8e6"/>
+  <rect x="28.5" y="15" width="7" height="34" rx="2" fill="#f0b429"/>
+  <rect x="37.5" y="23" width="7" height="26" rx="2" fill="#6b7280"/>
+</svg>

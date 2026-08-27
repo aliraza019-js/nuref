@@ -38,19 +38,19 @@ export default function ContactPage() {
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-navy">Sales desk</p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">Contact Us</h1>
-          <p className="mt-5 text-base leading-relaxed text-black">
+          <p className="mt-5 text-base leading-relaxed text-ink">
             Have a project, bulk order or a question about our electrodes? Send a message and our
             sales team will follow up — usually the same working day.
           </p>
 
           <div className="mt-7 flex flex-col gap-3">
-            <div className="rounded-2xl border border-powder bg-powder/15 p-5">
+            <div className="rounded-2xl border border-powder bg-panel p-5">
               <div className="text-[11px] font-bold uppercase tracking-wide text-navy">Technical support</div>
-              <div className="mt-1 text-sm text-black">Electrode selection, installation guidance, calibration and testing</div>
+              <div className="mt-1 text-sm text-ink">Electrode selection, installation guidance, calibration and testing</div>
             </div>
-            <div className="rounded-2xl border border-powder bg-powder/15 p-5">
+            <div className="rounded-2xl border border-powder bg-panel p-5">
               <div className="text-[11px] font-bold uppercase tracking-wide text-navy">Procurement</div>
-              <div className="mt-1 text-sm text-black">Bulk pricing, project documentation packs and delivery schedules</div>
+              <div className="mt-1 text-sm text-ink">Bulk pricing, project documentation packs and delivery schedules</div>
             </div>
           </div>
         </div>
@@ -58,11 +58,11 @@ export default function ContactPage() {
         <div className="rounded-3xl border border-powder p-8 shadow-[0_40px_76px_-34px_rgba(20,40,76,0.28)]">
           {sent ? (
             <div className="py-12 text-center">
-              <div className="mx-auto flex h-[54px] w-[54px] items-center justify-center rounded-full bg-gold text-xl font-extrabold text-navy">
+              <div className="mx-auto flex h-[54px] w-[54px] items-center justify-center rounded-full bg-ink text-xl font-extrabold text-navy">
                 ✓
               </div>
               <div className="mt-5 text-xl font-extrabold tracking-tight text-navy">Message sent</div>
-              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-black">
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink">
                 Thanks — our sales team will follow up shortly with pricing and lead time.
               </p>
             </div>
@@ -70,7 +70,7 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit}>
               <div className="grid gap-3.5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-black">Name</label>
+                  <label className="mb-1.5 block text-xs font-semibold text-ink">Name</label>
                   <input
                     required
                     value={form.name}
@@ -80,7 +80,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-black">Work email</label>
+                  <label className="mb-1.5 block text-xs font-semibold text-ink">Work email</label>
                   <input
                     type="email"
                     required
@@ -91,7 +91,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-black">Company</label>
+                  <label className="mb-1.5 block text-xs font-semibold text-ink">Company</label>
                   <input
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
@@ -100,7 +100,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-black">Enquiry type</label>
+                  <label className="mb-1.5 block text-xs font-semibold text-ink">Enquiry type</label>
                   <input
                     value={form.enquiryType}
                     onChange={(e) => setForm({ ...form, enquiryType: e.target.value })}
@@ -111,7 +111,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-3.5">
-                <label className="mb-1.5 block text-xs font-semibold text-black">Message</label>
+                <label className="mb-1.5 block text-xs font-semibold text-ink">Message</label>
                 <textarea
                   required
                   rows={6}
@@ -127,7 +127,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-5 w-full rounded-xl bg-navy px-4 py-3.5 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy disabled:opacity-50"
+                className="mt-5 w-full rounded-xl bg-ink px-4 py-3.5 text-sm font-bold text-white transition-colors hover:bg-ink disabled:opacity-50"
               >
                 {submitting ? "Sending..." : "Send message"}
               </button>

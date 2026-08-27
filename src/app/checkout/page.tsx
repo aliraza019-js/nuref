@@ -23,17 +23,17 @@ const EMPTY_FORM: CustomerForm = { name: "", email: "", company: "", address: ""
 
 const appearance: Appearance = {
   variables: {
-    colorPrimary: "#f0b429",
-    colorBackground: "#14284c",
+    colorPrimary: "#ffffff",
+    colorBackground: "#14233f",
     colorText: "#ffffff",
-    colorTextSecondary: "#b7c6dc",
+    colorTextSecondary: "#e8e8e6",
     fontFamily: "Arial, Helvetica, sans-serif",
     borderRadius: "10px",
     spacingUnit: "4px",
   },
   rules: {
-    ".Input": { border: "1px solid rgba(183,198,220,0.3)", backgroundColor: "rgba(183,198,220,0.1)" },
-    ".Label": { color: "#b7c6dc", fontSize: "13px", fontWeight: "600" },
+    ".Input": { border: "1px solid rgba(232,232,230,0.3)", backgroundColor: "rgba(232,232,230,0.1)" },
+    ".Label": { color: "#e8e8e6", fontSize: "13px", fontWeight: "600" },
   },
 };
 
@@ -70,10 +70,10 @@ function PaymentStep({ customer, onSuccess }: { customer: CustomerForm; onSucces
 
   return (
     <div>
-      <div className="rounded-2xl bg-navy p-6">
+      <div className="rounded-2xl bg-ink p-6">
         <div className="mb-4 flex items-center justify-between">
           <span className="text-sm font-semibold text-powder">Card details</span>
-          <span className="text-[11px] font-bold tracking-wide text-gold">SECURE</span>
+          <span className="text-[11px] font-bold tracking-wide text-white/70">SECURE</span>
         </div>
         <PaymentElement />
       </div>
@@ -84,7 +84,7 @@ function PaymentStep({ customer, onSuccess }: { customer: CustomerForm; onSucces
         type="button"
         onClick={handlePay}
         disabled={submitting || !stripe}
-        className="mt-5 w-full rounded-xl bg-gold px-6 py-3.5 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-white disabled:opacity-50"
+        className="mt-5 w-full rounded-xl bg-ink px-6 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {submitting ? "Processing…" : "Pay now"}
       </button>
@@ -155,8 +155,8 @@ export default function CheckoutPage() {
   if (ordered) {
     return (
       <main className="mx-auto max-w-2xl px-6 py-16">
-        <div className="rounded-3xl bg-navy p-14 text-center">
-          <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full bg-gold text-2xl font-extrabold text-navy">
+        <div className="rounded-3xl bg-ink p-14 text-center">
+          <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full bg-ink text-2xl font-extrabold text-navy">
             ✓
           </div>
           <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white">Order confirmed</h1>
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
           </p>
           <Link
             href="/products"
-            className="mt-7 inline-block rounded-xl bg-gold px-7 py-3.5 text-sm font-bold text-navy transition-opacity hover:opacity-90"
+            className="mt-7 inline-block rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-ink transition-opacity hover:opacity-90"
           >
             Continue shopping
           </Link>
@@ -253,7 +253,7 @@ export default function CheckoutPage() {
                 type="button"
                 onClick={handleContinue}
                 disabled={creatingIntent}
-                className="w-full rounded-xl bg-navy px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy disabled:opacity-50"
+                className="w-full rounded-xl bg-ink px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-ink disabled:opacity-50"
               >
                 {creatingIntent ? "Preparing payment…" : "Continue to payment"}
               </button>
@@ -262,10 +262,10 @@ export default function CheckoutPage() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-powder shadow-[0_30px_56px_-32px_rgba(20,40,76,0.28)] lg:sticky lg:top-28 lg:self-start">
-          <div className="bg-navy px-6 py-5 text-base font-bold text-white">Order summary</div>
+          <div className="bg-ink px-6 py-5 text-base font-bold text-white">Order summary</div>
           <div className="p-6">
             {items.map((item) => (
-              <div key={item.slug} className="flex justify-between gap-4 py-2 text-sm text-black">
+              <div key={item.slug} className="flex justify-between gap-4 py-2 text-sm text-ink">
                 <span>
                   {item.name} × {item.quantity}
                 </span>
@@ -287,7 +287,7 @@ export default function CheckoutPage() {
 function Field({ label, span2, children }: { label: string; span2?: boolean; children: React.ReactNode }) {
   return (
     <div className={span2 ? "sm:col-span-2" : ""}>
-      <div className="mb-1.5 text-xs font-semibold text-black">{label}</div>
+      <div className="mb-1.5 text-xs font-semibold text-ink">{label}</div>
       {children}
     </div>
   );

@@ -1,8 +1,14 @@
 // Abstract brand-colored graphic standing in for real product photography
 // until it's available. Represents reference electrodes + a monitored signal.
-export default function ElectrodeGraphic({ className = "" }: { className?: string }) {
+export default function ElectrodeGraphic({
+  className = "",
+  style,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   return (
-    <svg viewBox="0 0 480 480" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 480 480" className={className} style={style} fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="240" cy="240" r="230" fill="#b7c6dc" fillOpacity="0.18" />
       <circle cx="240" cy="240" r="170" fill="#b7c6dc" fillOpacity="0.22" />
 

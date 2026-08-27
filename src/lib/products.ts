@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Argent Crete is a silver/silver chloride (Ag/AgCl) reference electrode built for permanent embedment in reinforced concrete, giving corrosion engineers a stable, long-life reference potential for monitoring CP systems on decks, piles and other concrete structures.",
     priceCents: 24900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_ARGENT_CRETE.png",
     specs: [
       { label: "Reference type", value: "Ag/AgCl (Silver/Silver Chloride)" },
       { label: "Application", value: "Concrete embedded" },
@@ -78,7 +78,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Argent Terra is a silver/silver chloride (Ag/AgCl) reference electrode configured for soil and buried service, giving stable, low-drift potential readings on underground pipelines and structures.",
     priceCents: 22900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_ARGENT_TERRA.png",
     specs: [
       { label: "Reference type", value: "Ag/AgCl (Silver/Silver Chloride)" },
       { label: "Application", value: "Soil / buried" },
@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Argent Aqua is a silver/silver chloride (Ag/AgCl) reference electrode built for marine and seawater immersion, supplied fully potted with a sealed cable entry for permanent submerged installation.",
     priceCents: 25900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_ARGENT_AQUA.png",
     specs: [
       { label: "Reference type", value: "Ag/AgCl (Silver/Silver Chloride)" },
       { label: "Application", value: "Marine / seawater" },
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Cuprum Terra is the industry-standard copper/copper sulfate (Cu/CuSO₄) reference electrode for soil and buried service, used for potential measurement on buried pipelines and soil-side structures.",
     priceCents: 18900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_CUPRUM_TERRA.png",
     specs: [
       { label: "Reference type", value: "Cu/CuSO₄ (Copper/Copper Sulfate)" },
       { label: "Application", value: "Soil / buried" },
@@ -177,7 +177,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Zeta Aqua is a high-purity zinc reference electrode configured for marine and seawater service — a robust reference for long-term submerged monitoring.",
     priceCents: 21900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_ZETA_AQUA.png",
     specs: [
       { label: "Reference type", value: "Zinc" },
       { label: "Application", value: "Marine / seawater" },
@@ -210,7 +210,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Nuref Zeta Terra is a high-purity zinc reference electrode configured for soil and buried service — a durable reference for long-term embedded monitoring.",
     priceCents: 20900,
-    image: "/products/placeholder.svg",
+    image: "/products/NUREF_ZETA_TERRA.png",
     specs: [
       { label: "Reference type", value: "Zinc" },
       { label: "Application", value: "Soil / buried" },
@@ -243,7 +243,7 @@ export const PRODUCTS: Product[] = [
     description:
       "A mixed metal oxide coated titanium pseudo reference electrode engineered for demanding cathodic protection monitoring where very long service life and dimensional stability are required. Inert, non-consumable and maintenance free.",
     priceCents: 29900,
-    image: "/products/placeholder.svg",
+    image: "/products/MMO_TI_PSEUDO_REFERENCE_ELECTRODE.png",
     specs: [
       { label: "Reference type", value: "Pseudo reference (MMO-coated titanium)" },
       { label: "Stability", value: "±15 mV, environment dependent" },
@@ -276,7 +276,7 @@ export const PRODUCTS: Product[] = [
     description:
       "A pre-wired terminal board and shunt assembly for pipeline test stations, giving a clean, labelled termination for reference electrode, structure and coupon leads.",
     priceCents: 8900,
-    image: "/products/placeholder.svg",
+    image: "/products/TEST_STATION_TERMINAL_BOARD.png",
     specs: [
       { label: "Terminals", value: "8-way, nickel-plated brass" },
       { label: "Shunt", value: "0.01 Ω / 1 Ω options" },
@@ -304,7 +304,7 @@ export const PRODUCTS: Product[] = [
     description:
       "A portable field calibration kit for verifying reference electrode potential against a certified master cell, so survey data stays traceable between scheduled recalibrations.",
     priceCents: 14500,
-    image: "/products/placeholder.svg",
+    image: "/products/FIELD_CALIBRATION_KIT.png",
     specs: [
       { label: "Master cell", value: "Certified Cu/CuSO₄, traceable" },
       { label: "Accuracy", value: "±2 mV against reference standard" },

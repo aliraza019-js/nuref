@@ -29,12 +29,12 @@ function SuccessContent() {
     return (
       <main className="mx-auto max-w-xl px-6 py-20 text-center">
         <h1 className="text-2xl font-bold text-navy">Payment Not Completed</h1>
-        <p className="mt-4 text-base leading-relaxed text-black">
+        <p className="mt-4 text-base leading-relaxed text-ink">
           Your payment could not be confirmed. You have not been charged. Please try again.
         </p>
         <Link
           href="/cart"
-          className="mt-8 inline-block rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+          className="mt-8 inline-block rounded-xl bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-ink"
         >
           Return to Cart
         </Link>
@@ -44,8 +44,8 @@ function SuccessContent() {
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-16">
-      <div className="rounded-3xl bg-navy p-14 text-center">
-        <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full bg-gold text-2xl font-extrabold text-navy">
+      <div className="rounded-3xl bg-ink p-14 text-center">
+        <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full bg-ink text-2xl font-extrabold text-navy">
           ✓
         </div>
         <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white">
@@ -58,7 +58,7 @@ function SuccessContent() {
         </p>
         <Link
           href="/products"
-          className="mt-7 inline-block rounded-xl bg-gold px-7 py-3.5 text-sm font-bold text-navy transition-opacity hover:opacity-90"
+          className="mt-7 inline-block rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-ink transition-opacity hover:opacity-90"
         >
           Continue Shopping
         </Link>

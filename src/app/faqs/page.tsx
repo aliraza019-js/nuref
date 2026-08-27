@@ -62,14 +62,14 @@ export default function FaqsPage() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-powder bg-powder/15 p-7">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-powder bg-panel p-7">
           <div>
             <div className="text-lg font-bold text-navy">Still have a question?</div>
-            <div className="mt-1 text-sm text-black">Our engineers answer technical enquiries the same working day.</div>
+            <div className="mt-1 text-sm text-ink">Our engineers answer technical enquiries the same working day.</div>
           </div>
           <Link
             href="/contact"
-            className="rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gold hover:text-navy"
+            className="rounded-xl bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-ink"
           >
             Contact us
           </Link>

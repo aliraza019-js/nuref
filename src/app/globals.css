@@ -2,23 +2,32 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
+  --foreground: #0a0a0a;
 
-  /* Brand palette — sampled from the Nuref logo. Do not introduce other colors. */
-  --nuref-navy: #14284c;
-  --nuref-slate: #64749a;
-  --nuref-powder: #b7c6dc;
-  --nuref-gold: #f0b429;
+  /* Site palette. Do not introduce colors outside this set. */
+  --nuref-ink: #0a0a0a;      /* primary black — buttons, strong type */
+  --nuref-navy: #14233f;     /* dark navy — headings */
+  --nuref-slate: #6b7280;    /* secondary grey — body copy */
+  --nuref-border: #e8e8e6;   /* hairlines and card borders */
+  --nuref-panel: #f8f8f7;    /* product image backgrounds */
+  --nuref-gold: #f0b429;     /* retained for the logo mark only */
+
+  /* Height reserved for the fixed floating header: 16px top inset + 68px bar. */
+  --nr-header-h: 84px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ink: var(--nuref-ink);
   --color-navy: var(--nuref-navy);
   --color-slate: var(--nuref-slate);
-  --color-powder: var(--nuref-powder);
+  --color-border: var(--nuref-border);
+  --color-panel: var(--nuref-panel);
+  --color-powder: var(--nuref-border);
   --color-gold: var(--nuref-gold);
   --font-sans: Arial, Helvetica, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
 }
 
 body {
@@ -36,11 +45,20 @@ body {
   animation: nr-float 7s ease-in-out infinite;
 }
 
+/*
+ * Full-bleed hero sections opt into rendering *behind* the floating header:
+ * pull up under it, then pad the content back down so nothing is obscured.
+ */
+.nr-hero-bleed {
+  margin-top: calc(var(--nr-header-h) * -1);
+  padding-top: var(--nr-header-h);
+}
+
 .nr-checkout-input {
   width: 100%;
   padding: 13px 15px;
   border-radius: 11px;
-  border: 1px solid var(--nuref-powder);
+  border: 1px solid var(--nuref-border);
   font-size: 15px;
   color: #000000;
   background: #ffffff;
@@ -53,6 +71,6 @@ body {
 }
 
 .nr-checkout-input:disabled {
-  background: rgba(183, 198, 220, 0.15);
+  background: var(--nuref-panel);
   color: var(--nuref-slate);
 }

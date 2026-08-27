@@ -13,6 +13,10 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  /** Slide-out cart panel visibility. Opens automatically on add-to-cart. */
+  drawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (slug: string) => void;
   setQuantity: (slug: string, quantity: number) => void;
@@ -23,18 +27,24 @@ export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
+      drawerOpen: false,
+
+      openDrawer: () => set({ drawerOpen: true }),
+      closeDrawer: () => set({ drawerOpen: false }),
 
       addItem: (product, quantity = 1) => {
         const items = get().items;
         const existing = items.find((i) => i.slug === product.slug);
         if (existing) {
           set({
+            drawerOpen: true,
             items: items.map((i) =>
               i.slug === product.slug ? { ...i, quantity: i.quantity + quantity } : i,
             ),
           });
         } else {
           set({
+            drawerOpen: true,
             items: [
               ...items,
               {
@@ -62,7 +72,7 @@ export const useCartStore = create<CartState>()(
 
       clear: () => set({ items: [] }),
     }),
-    { name: "nuref-cart" },
+    { name: "nuref-cart", partialize: (s) => ({ items: s.items }) },
   ),
 );
 
