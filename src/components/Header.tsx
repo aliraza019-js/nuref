@@ -7,12 +7,12 @@ import { Menu, ShoppingCart, X } from "lucide-react";
 import Logo from "./Logo";
 import { useCartStore, cartItemCount } from "@/store/useCartStore";
 
+// Industries Served and Applications are intentionally omitted here — the
+// pages still exist and stay reachable from the footer and internal links.
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Nuref" },
   { href: "/products", label: "Products" },
-  { href: "/industries-served", label: "Industries Served" },
-  { href: "/applications", label: "Applications" },
   { href: "/faqs", label: "FAQs" },
   { href: "/contact", label: "Contact Us" },
 ];
