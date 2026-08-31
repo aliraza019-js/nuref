@@ -39,8 +39,6 @@ export default function Footer() {
           <h3 className="mb-4 text-xs font-bold uppercase tracking-wide text-white">Company</h3>
           <ul className="space-y-2 text-sm">
             <li><Link href="/about" className="text-white hover:text-ink">About Nuref</Link></li>
-            <li><Link href="/industries-served" className="text-white hover:text-ink">Industries Served</Link></li>
-            <li><Link href="/applications" className="text-white hover:text-ink">Applications</Link></li>
             <li><Link href="/faqs" className="text-white hover:text-ink">FAQs</Link></li>
           </ul>
         </div>
